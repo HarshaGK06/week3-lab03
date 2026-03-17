@@ -8,6 +8,9 @@
  * - Subtraction (-)
  * - Multiplication (*)
  * - Division (/)
+ * - Modulo (%)
+ * - Exponentiation (**)
+ * - Square Root (sqrt)
  */
 
 const readline = require('readline');
@@ -36,6 +39,24 @@ function divide(a, b) {
   return a / b;
 }
 
+function modulo(a, b) {
+  if (b === 0) {
+    return 'Error: Modulo by zero';
+  }
+  return a % b;
+}
+
+function power(base, exponent) {
+  return Math.pow(base, exponent);
+}
+
+function squareRoot(n) {
+  if (n < 0) {
+    return 'Error: Cannot calculate square root of negative number';
+  }
+  return Math.sqrt(n);
+}
+
 function performCalculation(num1, operator, num2) {
   const n1 = parseFloat(num1);
   const n2 = parseFloat(num2);
@@ -53,8 +74,15 @@ function performCalculation(num1, operator, num2) {
       return multiply(n1, n2);
     case '/':
       return divide(n1, n2);
+    case '%':
+      return modulo(n1, n2);
+    case 'pow':
+    case '**':
+      return power(n1, n2);
+    case 'sqrt':
+      return squareRoot(n1);
     default:
-      return 'Error: Unsupported operation. Use +, -, *, or /';
+      return 'Error: Unsupported operation. Use +, -, *, /, %, pow, or sqrt';
   }
 }
 
@@ -67,7 +95,10 @@ function startCalculator() {
   console.log('  - : Subtraction');
   console.log('  * : Multiplication');
   console.log('  / : Division');
-  console.log('\nExample: 10 + 5');
+  console.log('  % : Modulo');
+  console.log('  ** : Exponentiation (Power)');
+  console.log('  sqrt : Square Root (format: number sqrt)');
+  console.log('\nExamples: 10 + 5, 20 ** 2, 16 sqrt');
   console.log('Type "exit" to quit\n');
 
   promptUser();
@@ -100,6 +131,9 @@ module.exports = {
   subtract,
   multiply,
   divide,
+  modulo,
+  power,
+  squareRoot,
   performCalculation
 };
 
